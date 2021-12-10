@@ -9,7 +9,7 @@ export async function reduceSample(flag: boolean) {
          * output sequence will be different with awaiting accumulator
          */
         if (flag) {
-            await accumulator
+            await accumulator // accumulator is the return from previous iteration; when callback is async function, it can be awaited
         }
         const result = await slowCalculator.multiplyBy10(number)
         console.log(`result: `, result)

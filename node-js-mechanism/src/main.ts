@@ -1,4 +1,6 @@
 // import * as scope from './scope/index'
+// scope.variableSample()
+// scope.closureSample()
 // scope.thisSample()
 
 // import * as eventLoop from './event-loop/index'
@@ -6,7 +8,8 @@
 // eventLoop.blockingCallstackSample()
 // eventLoop.awaitSample()
 // eventLoop.multiplePromisesSample()
-// eventLoop.nestedPromiseSample()
+// eventLoop.phaseSample()
+// eventLoop.promiseAllSample()
 
 // import * as arrayFunction from './array-function/index'
 // arrayFunction.mapSample()
