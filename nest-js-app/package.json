@@ -1,0 +1,19 @@
+{
+    "name": "nest-js-app",
+    "version": "1.0.0",
+    "main": "src/main.ts",
+    "scripts": {
+        "dev": "nodemon"
+    },
+    "dependencies": {
+        "@nestjs/common": "^8.2.3",
+        "@nestjs/core": "^8.2.3",
+        "@nestjs/platform-fastify": "^8.2.3",
+        "@types/node": "^14.11.5",
+        "ts-node": "^9.0.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.5",
+        "typescript": "^4.0.3"
+    }
+}
