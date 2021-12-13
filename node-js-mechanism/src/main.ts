@@ -1,3 +1,5 @@
+console.log(`Look at here`)
+
 // import * as scope from './scope/index'
 // scope.variableSample()
 // scope.closureSample()
