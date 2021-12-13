@@ -8,7 +8,7 @@ export class AppModule {
         return {
             module: AppModule,
             imports: [
-                AsynchronousModule
+                AsynchronousModule,
             ],
             controllers: [
                 AppController

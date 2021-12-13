@@ -2,42 +2,40 @@ import { createHash } from 'crypto'
 
 export class AsynchronousService {
 
+    private readonly hash = createHash('sha256')
+    private readonly numberOfHashUpdates = 10e6
+
     constructor() { }
 
     async blockEventLoop() {
-        const hash = createHash('sha256');
-        const numberOfHasUpdates = 10e6;
-
-        for (let iter = 0; iter < numberOfHasUpdates; iter++) {
-            hash.update(this.randomString(5));
+        for (let iter = 0; iter < this.numberOfHashUpdates; iter++) {
+            this.updateHash()
         }
         return `block event loop`
     }
 
     async asyncBlockEventLoop() {
-        const hash = createHash('sha256');
-        const numberOfHasUpdates = 10e6;
-
-        const updatehashAsync = async () => {
-            hash.update(this.randomString(5));
-        };
-
-        for (let iter = 0; iter < numberOfHasUpdates; iter++) {
-            await updatehashAsync();
+        for (let iter = 0; iter < this.numberOfHashUpdates; iter++) {
+            await this.updatehashAsync();
         }
         return `async block event loop`
     }
 
-    async blockEventLoopWithBreath() {
-        const hash = createHash('sha256');
-        const numberOfHasUpdates = 10e4;
-
-        for (let iter = 0; iter < numberOfHasUpdates; iter++) {
-            hash.update(this.randomString(5));
-            await this.breathSpace(0);
+    async blockEventLoopWithABreath() {
+        for (let iter = 0; iter < this.numberOfHashUpdates; iter++) {
+            this.updateHash()
+            await this.takeABreath(0);
         }
         return `block event loop with breath`
     }
+
+    updateHash() {
+        this.hash.update(this.randomString(5));
+    }
+
+    async updatehashAsync() {
+        this.hash.update(this.randomString(5));
+    };
 
     randomString(length) {
         let result = '';
@@ -49,9 +47,11 @@ export class AsynchronousService {
         return result;
     }
 
-    async breathSpace(delay) {
+    async takeABreath(delay) {
+        // async function itself is a micro task, hence can jump into current tick
         const promise = new Promise(
             (resolve) => {
+                // setTimeout is a macro task, will get into next tick
                 setTimeout(
                     () => resolve('success'),
                     delay
