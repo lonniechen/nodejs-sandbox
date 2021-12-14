@@ -4,6 +4,7 @@ import {
 } from '@nestjs/common';
 
 import { AsynchronousService } from './asynchronous.service'
+import { CustomLoggerService } from '../../common/logger/logger.service';
 
 /**
  * 
@@ -23,12 +24,15 @@ import { AsynchronousService } from './asynchronous.service'
 export class AsynchronousController {
     constructor(
         private readonly asynchronousService: AsynchronousService,
-    ) { }
-        
+        private readonly logger: CustomLoggerService
+    ) {
+        this.logger.setContext(AsynchronousController.name)
+    }
+
     @Get('/ping')
     async ping() {
-        const messge = `${new Date().toISOString()}: pong!`
-        console.log(messge)
+        const messge = `pong!`
+        this.logger.log(messge)
         return messge
     }
 
@@ -41,14 +45,14 @@ export class AsynchronousController {
     @Get('/block-event-loop')
     async blockEventLoop() {
         const result = await this.asynchronousService.blockEventLoop()
-        console.log(result)
+        this.logger.log(result)
         return result
     }
 
     @Get('/async-block-event-loop')
     async asyncBlockEventLoop() {
         const result = await this.asynchronousService.asyncBlockEventLoop()
-        console.log(result)
+        this.logger.log(result)
         return result
     }
 
@@ -56,7 +60,7 @@ export class AsynchronousController {
     @Get('/block-event-loop-with-a-breath')
     async blockEventLoopWithABreath() {
         const result = await this.asynchronousService.blockEventLoopWithABreath()
-        console.log(result)
+        this.logger.log(result)
         return result
     }
 }

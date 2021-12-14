@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { AsynchronousController } from './asynchronous.controller'
 import { AsynchronousService } from './asynchronous.service'
+import { LoggerModule } from '../../common/logger/logger.module';
 
 @Module({
     controllers: [
@@ -10,6 +11,8 @@ import { AsynchronousService } from './asynchronous.service'
     providers: [
         AsynchronousService,
     ],
-    imports: []
+    imports: [
+        LoggerModule
+    ]
 })
 export class AsynchronousModule { }
