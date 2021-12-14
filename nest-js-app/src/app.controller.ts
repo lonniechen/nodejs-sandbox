@@ -1,6 +1,7 @@
 import {
     Controller,
     Get,
+    Redirect,
 } from '@nestjs/common';
 import { CustomLoggerService } from './common/logger/logger.service';
 
@@ -12,10 +13,19 @@ export class AppController {
         this.logger.setContext(AppController.name)
     }
 
-    @Get('')
+    @Get('/test')
     async test() {
-        this.logger.log('hello world')
-        return 'hello world'
+        const message = `hello world`
+        this.logger.log(message)
+        return message
+    }
+
+    @Get()
+    @Redirect('/api-docs', 302)
+    async apiDocs() {
+        const message = `API documentation`
+        this.logger.log(message)
+        return message
     }
 
 }
